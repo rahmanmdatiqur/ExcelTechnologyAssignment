@@ -1,0 +1,10 @@
+.jp-multiselect {display:table;}
+.jp-multiselect select {width:100%;}
+.jp-multiselect .from-panel {float:left; width:40%;min-width:270px}
+.jp-multiselect .from-panel option {width:100%; display:block;}
+.jp-multiselect .move-panel {float:left; width:18%; padding:5px;display:flex;flex-direction:column;align-items:center}
+.jp-multiselect .to-panel {float:right; width:40%;;min-width:270px}
+.jp-multiselect .to-panel option {width:100%; display:block;}
+.jp-multiselect .control-panel {float:left; width:5%;}
+.btn-list-add {margin:5px}
+.btn-list-remove {margin:5px}

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PatientInformationPage.Models.PatientInformation>
+
+@{
+    ViewData["Title"] = "AllPatientsData";
+}
+
+<h2 class="text-center text-secondary">Patient Information</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Index">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiseaseInformation.DiseaseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Epilepsy)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiseaseInformation.DiseaseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epilepsy)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

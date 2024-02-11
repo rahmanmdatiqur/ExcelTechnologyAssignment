@@ -1,0 +1,97 @@
+﻿@model PatientInformationPage.ViewModel.PatientInformationVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row">
+    <div class="col">
+        <form id="PatientAddForm" asp-controller="PatientEntry" asp-action="CreatePatientInformation" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <h2 class="text-center text-secondary"> Patient Information</h2>
+            <div class="form-group row mb-2">
+                <label asp-for="PatientName" class="col-form-label col-2"></label>
+                <div class="col-8">
+                    <input asp-for="PatientName" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="PatientName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-form-label col-2">Disease Name</label>
+                <div class="col-8">
+                    <select name="DiseaseId" asp-for="DiseaseId" asp-items="ViewBag.diseases as SelectList" class="form-control">
+                        <option value="" selected>---Select---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-form-label col-2">Epilepsy</label>
+                <div class="col-8">
+                    <select asp-for="Epilepsy" asp-items="Html.GetEnumSelectList<Epilepsy>()" class="form-control">
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-form-label col-2">Other NCDs</label>
+                <div class="col-8">
+                    <div class="jp-multiselect w-100">
+                        <div class="from-panel">
+                            @Html.ListBox("NCDs", (IEnumerable<SelectListItem>)ViewBag.NCDs, new { @class = "form-control" })
+                        </div>
+                        <div class="move-panel">
+                            <button type="button" class="btn btn-secondary btn-sm btn-move-selected-right btn-list-add"></button>
+                            <button type="button" class="btn btn-secondary btn-sm btn-move-selected-left btn-list-remove"></button>
+                        </div>
+                        <div class="to-panel">
+                            @Html.ListBoxFor(m => m.NCDs, new SelectList(Enumerable.Empty<SelectListItem>()),  new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-form-label col-2">Allergies</label>
+                <div class="col-8">
+                    <div class="jp-multiselect w-100">
+                        <div class="from-panel">
+                            @Html.ListBox("allergies", (IEnumerable<SelectListItem>)ViewBag.allergies,  new { @class = "form-control" })
+                        </div>
+                        <div class="move-panel">
+                            <button type="button" class="btn btn-secondary btn-sm btn-move-selected-right btn-list-add"></button>
+                            <button type="button" class="btn btn-secondary btn-sm btn-move-selected-left btn-list-remove"></button>
+                        </div>
+                        <div class="to-panel">
+                            @Html.ListBoxFor(m => m.Allergies, new SelectList(Enumerable.Empty<SelectListItem>()),  new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-10 offset-2">
+                    <button type="submit" data-category="CRUD" id="btnCustomerAddFormSubmit" data-href="@Url.Action("Create","PatientEntry")" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Using CDN link for jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@section Scripts{
+    <script>
+        $(".jp-multiselect").jQueryMultiSelection();
+
+        $(".btn-list-add").text("Add >");
+        $(".btn-list-remove").text("< Remove");
+
+
+    </script>
+}
